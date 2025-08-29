@@ -14,7 +14,7 @@ class Node
         {
 
         }
-        
+
         Node(int x) : data(x){}
         
     //getters
@@ -48,22 +48,37 @@ class Node
         {
             data = x;
         }
-};
 
-class LinkedList
-{
-    private:
-
-
-    public:
-        LinkedList(){}
-
-        void Append(Node node)
+    //the good stuff
+        void Append(Node head, Node node)
         {
+            if(head.GetRightPtr() == nullptr)
+            {
+                head.SetRightPtr(&node);
+                node.SetLeftPtr(&head);
+            }
 
+            else
+            {
+                Append(*head.GetRightPtr(), node);
+            }
         }
 
-        void Preppend(Node node)
+        void Preppend(Node head, Node node)
+        {
+            if(head.GetLeftPtr() == nullptr)
+            {
+                head.SetLeftPtr(&node);
+                node.SetRightPtr(&head);
+            }
+            
+            else
+            {
+                Preppend(*head.GetLeftPtr(), node);
+            }
+        }
+
+        void Insert(Node node, Node value)
         {
             
         }
@@ -72,6 +87,7 @@ class LinkedList
         {
 
         }
+
 };
 
 int main()
