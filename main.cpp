@@ -10,7 +10,6 @@ class Node
         Node* rigth_ptr = nullptr;
 
     public:
-
     //constructors
         Node()
         {}
@@ -82,11 +81,33 @@ class LinkedList
                 }
             }
         }
-};
 
+        void Append(Node node)
+        {
+            array.push_back(node);
+            Link();
+        }
+
+        void Preppend(Node node)
+        {
+            array.insert(array.begin(), node);
+            Link();
+        }
+
+        void PrintList()
+        {
+            for(int i = 0; i < array.size(); i++)
+            {
+                std::cout << array[i].GetData() << "\n"; 
+            }
+        }
+};
 
 int main()
 {
+    LinkedList list({1,5,2,6,7});
 
+    list.PrintList();
+    
     return 0;
 }
