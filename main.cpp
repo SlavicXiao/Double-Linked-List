@@ -1,6 +1,5 @@
 #include<iostream>
 #include<vector>
-#include<initializer_list>
 
 class Node
 {
@@ -12,8 +11,10 @@ class Node
     public:
     //constructors
         Node()
-        {}
+        {
 
+        }
+        
         Node(int x) : data(x){}
         
     //getters
@@ -52,62 +53,28 @@ class Node
 class LinkedList
 {
     private:
-        std::vector<Node> array;
+
 
     public:
         LinkedList(){}
-        LinkedList(std::initializer_list<int> values)
-        {
-            for(auto v : values)
-            {
-                Node node(v);
-                array.push_back(node);
-            }
-            Link();
-        }
-
-        void Link()
-        {
-            if(array.size() > 1)
-            {
-                for(int i = 0; i < array.size() - 1; i++)
-                {
-                    array[i].SetLeftPtr(array[i + 1].GetLeftPtr()); 
-                }
-
-                for(int i = array.size() - 1; i > 0; i--)
-                {
-                    array[i].SetRightPtr(array[i - 1].GetRightPtr());
-                }
-            }
-        }
 
         void Append(Node node)
         {
-            array.push_back(node);
-            Link();
+
         }
 
         void Preppend(Node node)
         {
-            array.insert(array.begin(), node);
-            Link();
+            
         }
 
         void PrintList()
         {
-            for(int i = 0; i < array.size(); i++)
-            {
-                std::cout << array[i].GetData() << "\n"; 
-            }
+
         }
 };
 
 int main()
 {
-    LinkedList list({1,5,2,6,7});
-
-    list.PrintList();
-    
     return 0;
 }
