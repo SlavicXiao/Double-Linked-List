@@ -7,7 +7,7 @@ class Node
         int data;
         int size = 0;
         Node* left_ptr = nullptr;
-        Node* rigth_ptr = nullptr;
+        Node* right_ptr = nullptr;
 
     public:
     //constructors
@@ -20,9 +20,9 @@ class Node
             return left_ptr;
         }
 
-        Node* GetRightPtr()
+        Node* GetRigthPtr()
         {
-            return rigth_ptr;
+            return right_ptr;
         }
 
         int GetData()
@@ -33,12 +33,12 @@ class Node
     //setters
         void SetLeftPtr(Node* x)
         {
-            this->left_ptr = x->GetLeftPtr();
+            this->left_ptr = x;
         }
 
         void SetRightPtr(Node* x)
         {
-            this->rigth_ptr = x->GetRightPtr();
+            this->right_ptr = x;
         }
 
         void SetData(int x)
@@ -47,65 +47,67 @@ class Node
         }
 
     //other
-        void Append(Node node)
+        void Append(Node* node)
         {
-            if(this->GetRightPtr() == nullptr)
+            if(this->GetRigthPtr() == nullptr)
             {
-                this->SetRightPtr(&node);
-                node.SetLeftPtr(this);
+                this->SetRightPtr(node);
+                node->SetLeftPtr(this);
             }
 
             else
             {
-                Append(*this->GetRightPtr());
+                Append(this->GetRigthPtr());
             }
         }
 
-        void Preppend(Node node)
+        void Preppend(Node* node)
         {
             if(this->GetLeftPtr() == nullptr)
             {
-                this->SetLeftPtr(&node);
-                node.SetRightPtr(this);
+                this->SetLeftPtr(node);
+                node->SetRightPtr(this);
             }
             
             else
             {
-                Preppend(*this->GetLeftPtr());
+                Preppend(this->GetLeftPtr());
             }
         }
 
-        void Insert(Node node)
+        void Insert(Node* node)
         {
-            Node* temp = this->GetRightPtr();
-            this->SetRightPtr(&node);
-            node.SetLeftPtr(this);
-            node.SetRightPtr(temp);
+            Node* temp = this->GetRigthPtr();
+            
+            node->SetRightPtr(temp);
+            node->SetLeftPtr(this);
+            this->SetRightPtr(node);
+
+            temp->SetLeftPtr(node);
         }
 
         void PrintList()
         {
-            Node* nextNode = this->GetLeftPtr();
+            Node* nextNode = this;
             while(nextNode != nullptr)
             {
-                std::cout << this->GetData() << " ";
-                nextNode = nextNode->GetLeftPtr();
+                std::cout << nextNode->GetData() << " ";
+                nextNode = nextNode->GetRigthPtr();
             }
         }
 };
 
 int main()
 {
-    Node node(1);
-    Node prequel(3);
-    Node sequel(5);
-    Node insert(11);
+    Node* node = new Node(1);
+    Node* prequel = new Node(3);
+    Node* sequel = new Node(5);
+    Node* insert = new Node(11);
 
-    node.Append(sequel);
-    node.Preppend(prequel);
-    sequel.Insert(insert);
+    node->Append(sequel);
+    node->Preppend(prequel);
 
-    node.PrintList();
+    node->PrintList();
 
     return 0;
 }
