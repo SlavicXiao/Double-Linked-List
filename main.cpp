@@ -75,12 +75,12 @@ class Node
             }
         }
 
-        void Insert(Node node, Node value)
+        void Insert(Node node)
         {
-            Node* temp = node.GetRightPtr();
-            node.SetRightPtr(&value);
-            value.SetLeftPtr(&node);
-            value.SetRightPtr(temp);
+            Node* temp = this->GetRightPtr();
+            this->SetRightPtr(&node);
+            node.SetLeftPtr(this);
+            node.SetRightPtr(temp);
         }
 
         void PrintList()
@@ -99,9 +99,11 @@ int main()
     Node node(1);
     Node prequel(3);
     Node sequel(5);
+    Node insert(11);
 
     node.Append(sequel);
     node.Preppend(prequel);
+    sequel.Insert(insert);
 
     node.PrintList();
 
