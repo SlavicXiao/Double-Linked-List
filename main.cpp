@@ -5,16 +5,13 @@ class Node
 {
     private:
         int data;
+        int size = 0;
         Node* left_ptr = nullptr;
         Node* rigth_ptr = nullptr;
 
     public:
     //constructors
-        Node()
-        {
-
-        }
-
+        Node(){}
         Node(int x) : data(x){}
         
     //getters
@@ -49,48 +46,64 @@ class Node
             data = x;
         }
 
-    //the good stuff
-        void Append(Node head, Node node)
+    //other
+        void Append(Node node)
         {
-            if(head.GetRightPtr() == nullptr)
+            if(this->GetRightPtr() == nullptr)
             {
-                head.SetRightPtr(&node);
-                node.SetLeftPtr(&head);
+                this->SetRightPtr(&node);
+                node.SetLeftPtr(this);
             }
 
             else
             {
-                Append(*head.GetRightPtr(), node);
+                Append(*this->GetRightPtr());
             }
         }
 
-        void Preppend(Node head, Node node)
+        void Preppend(Node node)
         {
-            if(head.GetLeftPtr() == nullptr)
+            if(this->GetLeftPtr() == nullptr)
             {
-                head.SetLeftPtr(&node);
-                node.SetRightPtr(&head);
+                this->SetLeftPtr(&node);
+                node.SetRightPtr(this);
             }
             
             else
             {
-                Preppend(*head.GetLeftPtr(), node);
+                Preppend(*this->GetLeftPtr());
             }
         }
 
         void Insert(Node node, Node value)
         {
-            
+            Node* temp = node.GetRightPtr();
+            node.SetRightPtr(&value);
+            value.SetLeftPtr(&node);
+            value.SetRightPtr(temp);
         }
 
         void PrintList()
         {
-
+            Node* nextNode = this->GetLeftPtr();
+            while(nextNode != nullptr)
+            {
+                std::cout << this->GetData() << " ";
+                nextNode = nextNode->GetLeftPtr();
+            }
         }
-
 };
 
 int main()
 {
+    Node node(1);
+    Node prequel(3);
+    Node sequel(5);
+
+    node.Append(sequel);
+    node.Preppend(prequel);
+
+    node.PrintList();
+
     return 0;
 }
