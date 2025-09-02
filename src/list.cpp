@@ -61,20 +61,52 @@ void List::Prepend(Node* node)
 
 void List::Insert(int index, Node* node)
 {
-    Node* target = head;
-
-    for(int i = 1; i < index; i++)
+    if(index < 0 || index > size)
     {
-        target = target->GetRightPtr();
+        std::cout << "Index out of range.";
     }
 
-    Node* prev = target->GetLeftPtr();
-    target->SetLeftPtr(node);
-    node->SetLeftPtr(prev);
-    node->SetRightPtr(target);
-    prev->SetRightPtr(node);
+    else if(index == 0)
+    {
+        Prepend(node);
+    }
 
-    size++;
+    else if(index == size)
+    {
+        Append(node);
+    }
+
+    else if(index == 1)
+    {
+        Node* next;
+        if(head->GetRightPtr() != nullptr)
+        {
+            next = head->GetRightPtr();
+            next->SetLeftPtr(node);
+        }
+
+        head->SetRightPtr(node);
+        node->SetLeftPtr(head);
+
+    }
+
+    else
+    {
+        Node* target = head;
+
+        for(int i = 0; i < index; i++)
+        {
+            target = target->GetRightPtr();
+        }
+
+        Node* prev = target->GetLeftPtr();
+        target->SetLeftPtr(node);
+        node->SetLeftPtr(prev);
+        node->SetRightPtr(target);
+        prev->SetRightPtr(node);
+
+        size++;
+    }
 }
 
 void List::DeleteList()

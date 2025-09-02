@@ -15,9 +15,10 @@ int main()
 
     abc.Append(node);
     abc.Prepend(prequel);
-    abc.Append(random);
-    //abc.Insert(2, insert);
-
+    abc.Append(sequel);
+    abc.Insert(1, insert);
+    abc.Insert(3, random);
+    
     abc.Print();
     std::cout << "\n" << abc.Size();
 
