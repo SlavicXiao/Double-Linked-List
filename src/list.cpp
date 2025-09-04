@@ -1,6 +1,6 @@
 #include<iostream>
-#include"list.h"
-#include"node.h"
+#include"list.hpp"
+#include"node.hpp"
 
 List::List()
 {

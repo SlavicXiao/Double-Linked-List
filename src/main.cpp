@@ -1,7 +1,7 @@
 #include<iostream>
 #include<vector>
-#include"node.h"
-#include"list.h"
+#include"node.hpp"
+#include"list.hpp"
 
 int main()
 {
