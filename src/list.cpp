@@ -61,21 +61,28 @@ void List::Prepend(Node* node)
 
 void List::Insert(int index, Node* node)
 {
+    std::cout << "Words \n";
     if(index < 0 || index > size)
     {
-        std::cout << "Index out of range.";
+        std::cout << "Index out of range.\n";
+        std::cout << "Index: " << index << "\n";
+        std::cout << "Size: " << size << "\n";
     }
+
 
     else if(index == 0)
     {
+        std::cout << "After range\n";
         Prepend(node);
     }
 
     else if(index == size)
     {
+        std::cout << "After range1\n";
         Append(node);
     }
 
+    /*
     else if(index == 1)
     {
         Node* next;
@@ -89,21 +96,35 @@ void List::Insert(int index, Node* node)
         node->SetLeftPtr(head);
 
     }
+    */
 
     else
     {
+        std::cout << "After range3\n";
         Node* target = head;
 
         for(int i = 0; i < index; i++)
         {
             target = target->GetRightPtr();
         }
+        std::cout << "After loop";
+
+        std::cout << target->GetData() << " ";
+        std::cout << target->GetLeftPtr()->GetData() << " ";
 
         Node* prev = target->GetLeftPtr();
+        std::cout << prev->GetData() << " ";
+
+
         target->SetLeftPtr(node);
         node->SetLeftPtr(prev);
         node->SetRightPtr(target);
+
+        std::cout << target->GetLeftPtr()->GetData() << " ";
+        
         prev->SetRightPtr(node);
+
+        std::cout << "the end";
 
         size++;
     }
