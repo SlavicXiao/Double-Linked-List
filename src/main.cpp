@@ -17,8 +17,7 @@ int main()
     abc.Prepend(prequel);
     abc.Append(sequel);
 
-    abc.Insert(2, insert);
-    abc.Print();
+    abc.Insert(1, insert);
     
     abc.Append(random);
    
