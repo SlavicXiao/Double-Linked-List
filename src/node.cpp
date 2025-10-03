@@ -3,11 +3,14 @@
 //constructors
     Node::Node()
     {
-        
+        left_ptr = nullptr;
+        right_ptr = nullptr;
     }
     Node::Node(int x)
     {
         data = x;
+        left_ptr = nullptr;
+        right_ptr = nullptr;
     }
     
 //getters

@@ -9,8 +9,10 @@ List::List()
     size = 0;
 }
 
-void List::Append(Node* node)
+void List::Append(int x)
 {
+    Node* node = new Node(x);
+
     if(head == nullptr)
     {
         head = node;
@@ -34,8 +36,10 @@ void List::Append(Node* node)
     size++;
 }
 
-void List::Prepend(Node* node)
+void List::Prepend(int x)
 {
+    Node* node = new Node(x);
+
     if(head == nullptr)
     {
         head = node;
@@ -60,9 +64,10 @@ void List::Prepend(Node* node)
     size++;
 }
 
-void List::Insert(int index, Node* node)
+void List::Insert(int index, int x)
 {
-    std::cout << "Words \n";
+    Node* node = new Node(x);
+
     if(index < 0 || index > size)
     {
         std::cout << "Index out of range.\n";
@@ -71,12 +76,12 @@ void List::Insert(int index, Node* node)
 
     else if(index == 0)
     {
-        Prepend(node);
+        Prepend(node->GetData());
     }
 
     else if(index == size)
     {
-        Append(node);
+        Append(node->GetData());
     }
 
     else
@@ -97,6 +102,92 @@ void List::Insert(int index, Node* node)
 
         size++;
     }
+}
+
+void List::DeleteLast()
+{
+    if(tail != nullptr)
+    {
+        Node* target = tail;
+        tail = tail->GetLeftPtr();
+        tail->SetRightPtr(nullptr);
+
+        delete target;
+        size--;
+    }
+    
+    else if (head != nullptr)
+    {
+        Node* target = head;
+        head = nullptr;
+        
+        delete target;
+        size--;
+    }
+
+    else
+    {
+        std::cout << "The list is empty. ";
+    }
+}
+
+void List::DeleteFirst()
+{
+    if(head != nullptr && tail == nullptr)
+    {
+        head = nullptr;
+        size--;
+    }
+
+    else if(head != nullptr)
+    {
+        Node* target = head;
+        head = head->GetRightPtr();
+
+        delete target;
+        size--;
+    }
+
+    else
+    {
+        std::cout << "The list is empty. ";
+    }
+}
+
+void List::Delete(int index)
+{
+    if(size == 0)
+    {
+        std::cout << "The list is empty. ";
+    }
+
+    else if(index < 0 || index > size)
+    {
+        std::cout << "Index out of range. ";
+    }
+
+    else if(index == 0) DeleteFirst();
+    else if(index == size - 1) DeleteLast(); 
+
+    else
+    {
+        Node* target = head;
+
+        int i;
+        for(i = 0; i < index; i++)
+        {
+            target = target->GetRightPtr();
+        }
+
+        Node* prev = target->GetLeftPtr();
+        Node* next = target->GetRightPtr();
+        prev->SetRightPtr(next);
+        next->SetLeftPtr(prev);
+
+        delete target;
+        size--;
+    }
+
 }
 
 void List::DeleteList()

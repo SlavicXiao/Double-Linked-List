@@ -5,24 +5,19 @@
 
 int main()
 {
-    Node* node = new Node(1);
-    Node* prequel = new Node(3);
-    Node* sequel = new Node(5);
-    Node* insert = new Node(11);
-    Node* random = new Node(10);
-
     List abc;
-
-    abc.Append(node);
-    abc.Prepend(prequel);
-    abc.Append(sequel);
-
-    abc.Insert(1, insert);
-    
-    abc.Append(random);
+    abc.Append(1);
+    abc.Prepend(3);
+    abc.Append(5);
+    abc.Insert(1, 11);
+    abc.Append(10);
    
     //3   *11*    1 5 10
 
+    abc.Delete(1);
+    abc.DeleteFirst();
+    abc.DeleteLast();
+    
     abc.Print();
     std::cout << "\n" << abc.Size();
 

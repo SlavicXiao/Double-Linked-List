@@ -10,9 +10,14 @@ class List
 
     public:
         List();
-        void Append(Node* node);
-        void Prepend(Node* node);
-        void Insert(int index, Node* node);
+        void Append(int x);
+        void Prepend(int x);
+        void Insert(int index, int x);
+        
+        void DeleteLast();
+        void DeleteFirst();
+        void Delete(int index);
+
         void DeleteList();
         void Print();
 
